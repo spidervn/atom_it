@@ -266,7 +266,7 @@ int quick_sort(int *a, int n) {
 		int i=l;
 		int j=r-2;	// dont care about pivot member
 		// Executing 
-		pivot = a[r];
+		pivot = a[r-1];
 		
 		// Partition
 		while (i<=j) {
@@ -310,6 +310,12 @@ int quick_sort(int *a, int n) {
 		}
 
 		// If i > j => i=j+1
+		// Swap pivot to "right" position
+		if (j+1 != r-1) {
+			int tmp = a[j+1];
+			a[j+1] = a[r-1];
+			a[r-1] = tmp;
+		}
 
 		// Partition ok
 		// a[i] > pivot or i==r
@@ -321,9 +327,9 @@ int quick_sort(int *a, int n) {
 			stack_right[stack_count++] = j+1;
 		}
 
-		if (i<r-1) {
+		if (i+1<r-1) {
 			// Push [i,r) to stack
-			stack_left[stack_count] = i;
+			stack_left[stack_count] = i+1;
 			stack_right[stack_count++] = r;
 		}
 	}
@@ -523,7 +529,6 @@ int inplace_reverse_v2(char* str) {
 
 int main(int argc, char** argv) {
 
-	/*	
 	srand(time(NULL));
 	printf("Sorttype=\r\n\t1. Internal sorting\r\n\t2. External sorting");
 
@@ -564,25 +569,6 @@ int main(int argc, char** argv) {
 		free(p_arr);
 	}
 
-	*/
-
-
-	std::string s1("1");
-
-	char str1[] = "1";
-	inplace_reverse_v2(str1);
-
-	printf("After reverse %s\r\n",str1);
-
-	char str2[] = "11 22 33j";
-	inplace_reverse_v2(str2);
-
-	printf("After reverse %s\r\n",str2);
-	
-	char str3[] = "here am i";	// "i ma ereh"
-	inplace_reverse_v2(str3);
-
-	printf("After reverse %s\r\n",str3);
 
 	return 0;
 }

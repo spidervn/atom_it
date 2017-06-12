@@ -1,0 +1,5 @@
+
+1. Quick sort	[x] 
+2. String compare [x]
+3. Max flow 
+4. Convex hull

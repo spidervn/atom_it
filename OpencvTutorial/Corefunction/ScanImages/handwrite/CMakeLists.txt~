@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 2.8)
+project( ScanImage )
+find_package( OpenCV REQUIRED )
+add_executable( new_scan_images new_scan_images.cpp )
+target_link_libraries( new_scan_images ${OpenCV_LIBS} )

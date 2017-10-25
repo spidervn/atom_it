@@ -85,7 +85,7 @@ void MyPolygon(Mat img)
 	rook_points[0][6] = Point(3*w/4, w/8);
 	rook_points[0][7] = Point(26*w/40, w/8);
 	rook_points[0][8] = Point(26*w/40, w/4);
-	rook_points[0][9] = Point(22*w/40, w/8);
+	rook_points[0][9] = Point(22*w/40, w/4);
 
 	rook_points[0][10] = Point(22*w/40, w/8);
 	rook_points[0][11] = Point(18*w/40, w/8);

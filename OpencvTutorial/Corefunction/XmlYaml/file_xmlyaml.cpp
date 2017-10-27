@@ -15,7 +15,7 @@ static void help(char** av)
 		<< "specifiying this in its extension like xml.gz yaml.gz etc ..." << endl
 		<< "With FileStorage you can serialize objects in OpenCV by using the <<and>> operatos " << endl 
 		<< "For example: - create a class and have it serialized" << endl
-		<< "				- use it to read and write matrices."
+		<< "				- use it to read and write matrices.";
 }
 
 class MyData
@@ -60,7 +60,7 @@ static void read(const FileNode& node, MyData& x, const MyData& default_value = 
 // This function will print our custom class to the console
 static ostream& operator<<(ostream& out, const MyData& m)
 {
-	out << "{ id= " << m.mid << ", ";
+	out << "{ id= " << m.id << ", ";
 	out << "X = " << m.X << ", ";
 	out << "A = " << m.A << "}";
 	return out;
@@ -101,7 +101,7 @@ int main(int ac, char** av)
 	}
 	{
 		// Read
-		cout << end << "Reading: " <<endl;
+		cout << endl << "Reading: " <<endl;
 		FileStorage fs;
 		fs.open(filename, FileStorage::READ);
 
@@ -147,7 +147,7 @@ int main(int ac, char** av)
 		cout << "MyData = " << endl << m << endl << endl;
 	
 		// Show default behavior for non existing nodes
-		cout << "Attempt to read NonExisting (should initialize the data structure with its default)."
+		cout << "Attempt to read NonExisting (should initialize the data structure with its default).";
 		fs["NonExisting"] >> m;
 		cout << endl << "NonExisting = " << endl << m << endl;
 	}

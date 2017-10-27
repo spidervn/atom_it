@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 2.8)
+project( file_xmlyaml )
+find_package( OpenCV REQUIRED )
+add_executable( file_xmlyaml file_xmlyaml.cpp )
+target_link_libraries( file_xmlyaml ${OpenCV_LIBS} )

@@ -25,7 +25,7 @@ static void help( char* progName)
         << progName << " [image-name Default: ../data/lena.jpg]"                   << endl << endl;
 }
 
-int main(int arg, char** argv)
+int main(int argc, char** argv)
 {
 	help(argv[0]);
 	const char* imagename = argc > 1 ? argv[1] : "../data/lena.jpg";

@@ -50,11 +50,17 @@ char window_name[] = "Smoothing Demo";
 int display_caption(const char* caption);
 int display_dst(int delay);
 
-int main()
+int main(int argc, char** argv)
 {
 	namedWindow(window_name, WINDOW_AUTOSIZE);
 
-	src = imread("../data/lena.jpg", IMREAD_COLOR);
+	if (argc < 2) {
+		printf("Usage %s img\n", argv[0]);
+		return -1;
+	}
+
+	// src = imread("../data/lena.jpg", IMREAD_COLOR);
+	src = imread(argv[1], IMREAD_COLOR);
 
 	if (display_caption("Original Image") != 0) {
 		return 0;
@@ -93,9 +99,9 @@ int main()
 		return 0;
 	}
 
-	for (int i = 1;  < MAX_KERNEL_LENGTH; i += 2)
+	for (int i = 1; i < MAX_KERNEL_LENGTH; i += 2)
 	{
-		mediaBlur(src, dst, i);
+		medianBlur(src, dst, i);
 		if (display_dst(DELAY_BLUR) != 0) {
 			return 0;
 		}
@@ -107,7 +113,7 @@ int main()
 
 	for (int i = 1; i < MAX_KERNEL_LENGTH; i += 2)
 	{
-		bilateralFilter(src, dst, i*2, i/2);
+		bilateralFilter(src, dst, i, i*2, i/2);
 		if (display_dst(DELAY_BLUR) != 0) {
 			return 0;
 		}

@@ -1,6 +1,6 @@
 
 #include "opencv2/imgproc.hpp"
-#include "opencv2/imgcodes.hpp"
+#include "opencv2/imgcodecs.hpp"
 #include "opencv2/highgui.hpp"
 
 using namespace cv;
@@ -57,7 +57,7 @@ void Morphology_Operations(int, void*)
 	int operation = morph_operator + 2;
 
 	Mat element = getStructuringElement(morph_elem, 
-											Size(2*morph_size +1, 2*morph_size+1) 
+											Size(2*morph_size +1, 2*morph_size+1),
 											Point(morph_size, morph_size));
 	morphologyEx(src, dst, operation, element);
 	imshow(window_name, dst);

@@ -118,7 +118,7 @@ int main(int argc, char** argv)
 			return 0;
 		}
 	}
-
+	
 	display_caption("End: Press a key!");
 
 	waitKey(0);

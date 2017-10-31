@@ -16,7 +16,7 @@ int const max_kernel_size = 21;
 void Erosion(int, void*);
 void Dilation(int, void*);
 
-static void help(const* progName)
+static void help(char* progName)
 {
 	printf("Usage: %s image_file\r\n", progName);
 }

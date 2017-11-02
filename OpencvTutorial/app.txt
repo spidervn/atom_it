@@ -1,0 +1,5 @@
+Opencv apps
+
+1. From image to pencil drawing
+2. Text extraction
+3. [Advanced] Extract text from comic

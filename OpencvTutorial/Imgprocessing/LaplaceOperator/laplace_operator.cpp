@@ -33,7 +33,7 @@ int main(int argc, char const *argv[])
 	Mat abs_dst;
 	Laplacian(src_gray, dst, ddepth, kernel_size, scale, delta, BORDER_DEFAULT);
 
-	covnertScaleAbs(dst, abs_dst);
+	convertScaleAbs(dst, abs_dst);
 	imshow(window_name, abs_dst);
 	waitKey(0);
 	return 0;

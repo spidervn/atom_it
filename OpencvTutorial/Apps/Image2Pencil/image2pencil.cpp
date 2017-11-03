@@ -33,7 +33,8 @@ int main(int argc, char const *argv[])
 	namedWindow( window_src, CV_WINDOW_AUTOSIZE);
 	namedWindow( window_dst, CV_WINDOW_AUTOSIZE);
 
-
+	imshow(window_src, src_hsv);
+	waitKey(0);
 
 	return 0;
 }

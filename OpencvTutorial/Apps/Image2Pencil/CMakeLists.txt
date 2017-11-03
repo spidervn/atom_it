@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 2.8)
+project( image2pencil  )
+find_package( OpenCV REQUIRED )
+add_executable( image2pencil image2pencil.cpp )
+target_link_libraries( image2pencil ${OpenCV_LIBS} )

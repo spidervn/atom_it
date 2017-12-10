@@ -5,12 +5,20 @@ AffineTransform/Makefile
 AffineTransform/affine_transform
 
 BackProjection/back_projection
+BackProjection/Makefile
+
+BoundingBoxCirlesContours/Makefile
+BoundingBoxCirlesContours/bounding_box_circle_contours
 
 CannyEdge/Makefile
 CannyEdge/canny_edge
+ConvexHull/convex_hull
+ConvexHull/convex_hull.cpp
 
 ErosionDilation/Makefile
 ErosionDilation/erosion_dilation
+FindingCountours/Makefile
+FindingCountours/finding_contours
 
 HistogramCalc/Makefile
 HistogramCalc/histogram_calc
@@ -24,6 +32,8 @@ HoughCircle/hough_circle
 HoughLine/Makefile
 HoughLine/hough_line
 
+ImageMoments/Makefile
+ImageMoments/image_moments
 ImagePyramid/Makefile
 ImagePyramid/pyramid
 
@@ -42,3 +52,6 @@ SmoothingImages/Makefile
 SmoothingImages/gausian_median
 SobelDerivatives/Makefile
 SobelDerivatives/sobel
+
+TemplateMatching/Makefile
+TemplateMatching/template_matching

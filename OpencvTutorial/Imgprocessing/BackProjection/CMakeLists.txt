@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 2.8)
+project( back_projection  )
+find_package( OpenCV REQUIRED )
+add_executable( back_projection back_projection.cpp )
+target_link_libraries( back_projection ${OpenCV_LIBS} )

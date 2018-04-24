@@ -7,10 +7,12 @@
 using namespace cv;
 using namespace std;
 
-int imageDodge(Mat& img)
+int imageDodge(Mat& img, Mat& mask, Mat& imgRes)
 {
 	// Scan through every pixels of an image
 	CV_Assert(img.depth() == CV_8U);
+	
+	Mat empty_Image(img.size().width, img.size().height, CV_8UC3, Scalar(0, 0, 0));
 
 	int countChanel = img.channels();
 	int nRows = img.rows;
@@ -30,11 +32,54 @@ int imageDodge(Mat& img)
 		p = img.ptr<uchar>(i);
 		for (j=0; j < nCols; ++j)
 		{
-			p[j] = p[j] * p[j];
+			if (p[j] == 255)
+			{
+				
+			}
+		}
+	}
+	
+	return 0;
+}
+
+int accessPixel(Mat& img, Mat& img_Res)
+{
+	printf("Image size=(%d,%d); (%d,%d)\r\n", img.size().width, img.size().height, img_Res.size().width, img_Res.size().height);
+
+	printf("Image01: ChannelCount = %d, isContinous = %d\r\n", img.channels(), img.isContinuous());
+	printf("Image02: ChannelCount = %d, isContinous = %d\r\n", img_Res.channels(), img_Res.isContinuous());
+
+	CV_Assert(img_Res.size().width == img.size().width && img_Res.size().height == img.size().height);
+
+	int countChannels = img.channels();
+	int nRows = img.rows;
+	int nCols = img.cols * countChannels;
+	int n_PixelCols = img.cols;
+
+	uchar* pixel;
+	uchar* pixel_2;
+
+	if (img.isContinuous())
+	{
+		nCols *= nRows;
+		n_PixelCols = img.cols * img.rows;
+		nRows = 1;
+	}
+
+	for (int i=0; i< nRows; i++)	
+	{
+		pixel = img.ptr<uchar>(i);
+		pixel_2 = img_Res.ptr<uchar>(i);
+
+		for (int j=0; j<nCols;j+= countChannels)
+		{
+			for (int k=0;k<countChannels;++k)
+			{
+				pixel_2[j+k] = pixel[j+k];
+			}
 		}
 	}
 
-	
 	return 0;
 }
 
@@ -57,7 +102,6 @@ int main(int argc, char const *argv[])
 	Mat srcGray;
 	Mat srcInverted;
 	Mat srcBlur;
-	Mat srcDodgeImg;
 	
 	src = imread(argv[1], IMREAD_COLOR);
 	if (src.empty())
@@ -65,7 +109,11 @@ int main(int argc, char const *argv[])
 		return -1;
 	}
 	
+	
 	cvtColor(src, srcGray, COLOR_BGR2GRAY);	// Convert from RGB to HSV
+
+	// Mat srcDodgeImg;
+	Mat srcDodgeImg(srcGray.size().height, srcGray.size().width, srcGray.type(), Scalar(0, 0, 0));	// Gray scale image	
 
 	// Two ways for inverting an image
 	// cv::subtract(cv::Scalar::all(255), srcGray, srcInverted);
@@ -74,8 +122,9 @@ int main(int argc, char const *argv[])
 	// Blur the image
 	GaussianBlur(srcInverted, srcBlur, Size(21,21), 0, 0);
 
-	srcDodgeImg = src.clone();
-	imageDodge(srcDodgeImg);
+	// srcDodgeImg = src.clone();
+	// imageDodge(srcDodgeImg);
+	accessPixel(srcGray, srcDodgeImg);
 
 	namedWindow( window_src, CV_WINDOW_AUTOSIZE);
 	namedWindow( window_dst, CV_WINDOW_AUTOSIZE);

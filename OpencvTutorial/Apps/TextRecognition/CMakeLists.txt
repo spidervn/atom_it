@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-project( textrecog  )
+project( morphology_test  )
 find_package( OpenCV REQUIRED )
-add_executable( textrecog textrecog.cpp )
-target_link_libraries( textrecog ${OpenCV_LIBS} )
+add_executable( morphology_test morphology_test.cpp )
+target_link_libraries( morphology_test ${OpenCV_LIBS} )

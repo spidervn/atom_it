@@ -1,5 +1,11 @@
+
 cmake_minimum_required(VERSION 2.8)
-project( morphology_test  )
+
+project( text_recognition  )
 find_package( OpenCV REQUIRED )
-add_executable( morphology_test morphology_test.cpp )
-target_link_libraries( morphology_test ${OpenCV_LIBS} )
+
+include_directories(src/)
+file(GLOB SOURCES "src/*.cpp" "src/app/impl/*.cpp" )
+
+add_executable( text_recognition ${SOURCES} )
+target_link_libraries( text_recognition ${OpenCV_LIBS} )

@@ -5,6 +5,10 @@
 #include "app/impl/CLaplaceApp.h"
 #include "app/impl/CCannyEdgeApp.h"
 #include "app/impl/C2DFilterApp.h"
+#include "app/impl/CHistogramApp.h"
+#include "app/impl/CBackProjectApp.h"
+#include "app/impl/CTemplateMatchingApp.h"
+#include "app/impl/CFindingContoursApp.h"
 
 int main( int argc, char* argv[]) 
 {
@@ -12,8 +16,12 @@ int main( int argc, char* argv[])
 
     // p_App = new CLaplaceApp();
     // p_App = new CCannyEdgeApp();
-    p_App = new C2DFilterApp();
+    // p_App = new C2DFilterApp();
+    // p_App = new CHistogramApp();
+    // p_App = new CBackProjectApp();
+    // p_App = new CTemplateMatchingApp();
+    p_App = new CFindingContoursApp();
     p_App->run(argc, argv);
-    
+
     return 0;
 }

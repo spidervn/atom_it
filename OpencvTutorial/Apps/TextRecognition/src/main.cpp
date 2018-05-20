@@ -9,6 +9,7 @@
 #include "app/impl/CBackProjectApp.h"
 #include "app/impl/CTemplateMatchingApp.h"
 #include "app/impl/CFindingContoursApp.h"
+#include "app/impl/CConvexHullApp.h"
 
 int main( int argc, char* argv[]) 
 {
@@ -20,7 +21,8 @@ int main( int argc, char* argv[])
     // p_App = new CHistogramApp();
     // p_App = new CBackProjectApp();
     // p_App = new CTemplateMatchingApp();
-    p_App = new CFindingContoursApp();
+    // p_App = new CFindingContoursApp();
+    p_App = new CConvexHullApp();
     p_App->run(argc, argv);
 
     return 0;

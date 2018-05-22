@@ -10,6 +10,8 @@
 #include "app/impl/CTemplateMatchingApp.h"
 #include "app/impl/CFindingContoursApp.h"
 #include "app/impl/CConvexHullApp.h"
+#include "app/impl/CBoundingBoxesApp.h"
+#include "app/impl/CImageSegmentationApp.h"
 
 int main( int argc, char* argv[]) 
 {
@@ -22,7 +24,9 @@ int main( int argc, char* argv[])
     // p_App = new CBackProjectApp();
     // p_App = new CTemplateMatchingApp();
     // p_App = new CFindingContoursApp();
-    p_App = new CConvexHullApp();
+    // p_App = new CConvexHullApp();
+    // p_App = new CBoundingBoxesApp();
+    p_App = new CImageSegmentationApp();
     p_App->run(argc, argv);
 
     return 0;

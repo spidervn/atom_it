@@ -22,7 +22,10 @@ int CCVCoreApp::run(int argc, char* argv[])
     }
 
     ICVCore* pCore = new CCVCore();
-    pCore->scanImgPixels(src);
+    // pCore->scanImgPixels(src);
+    // pCore->scanImgPixels_Iterator_(src);
+    pCore->scanImgPixels_Reference(src);
 
+    delete pCore;
     return 0;
 }

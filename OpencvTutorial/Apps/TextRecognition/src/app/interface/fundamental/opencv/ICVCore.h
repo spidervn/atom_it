@@ -11,6 +11,8 @@ public:
     virtual ~ICVCore() {};
 
     virtual void scanImgPixels(cv::Mat& I) = 0;
+    virtual void scanImgPixels_Iterator_(cv::Mat& I) = 0;
+    virtual void scanImgPixels_Reference(cv::Mat& I) = 0;
 };
 
 #endif

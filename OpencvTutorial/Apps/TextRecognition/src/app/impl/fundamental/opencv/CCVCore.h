@@ -13,6 +13,8 @@ public:
     virtual ~CCVCore() {};
 
     void scanImgPixels(cv::Mat& I);
+    void scanImgPixels_Iterator_(cv::Mat& I);
+    void scanImgPixels_Reference(cv::Mat& I);
 };
 
 #endif

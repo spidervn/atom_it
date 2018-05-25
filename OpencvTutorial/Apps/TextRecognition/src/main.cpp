@@ -35,5 +35,6 @@ int main( int argc, char* argv[])
 
     ICVStd* pStd = NULL;
 
+    delete p_App;
     return 0;
 }

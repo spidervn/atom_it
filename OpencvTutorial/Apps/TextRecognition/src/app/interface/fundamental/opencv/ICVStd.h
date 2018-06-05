@@ -37,6 +37,7 @@ typedef int CVCirclesGridFinderParameters;
 #define CV_BORDER_DEFAULT       8
 #define CV_BORDER_ISOLATED      9
 
+<<<<<<< Updated upstream
 // Camera Calibration
 #define CV_CALIB_CB_ADAPTIVE_THRESH     1
 #define CV_CALIB_CB_NORMALIZE_IMAGE     2
@@ -46,6 +47,17 @@ typedef int CVCirclesGridFinderParameters;
 #define CV_CALIB_CB_SYMMETRIC_GRID      1
 #define CV_CALIB_CB_ASYMMETRIC_GRID     2
 #define CV_CALIB_CB_CLUSTERING          3
+=======
+// OpenNI
+#define CV_CAP_OPENNI_DEPTH_MAP         1
+#define CV_CAP_OPENNI_POINT_CLOUD_MAP   2
+#define CV_CAP_OPENNI_DISPARITY_MAP     3
+#define CV_CAP_OPENNI_DISPARITY_MAP_32F 4
+#define CV_CAP_OPENNI_VALID_DEPTH_MASK  5
+#define CV_CAP_OPENNI_BGR_IMAGE         6
+#define CV_CAP_OPENNI_GRAY_IMAGE        7
+#define CV_CAP_OPENNI_IR_IMAGE          8
+>>>>>>> Stashed changes
 
 CVInputOutputArray CVNoArray = 0;
 
@@ -154,6 +166,8 @@ public:
                                 CVSize              winSize,
                                 CVSize              zeroZone,
                                 CVTermCriteria      criteria) = 0;
+
+  
 
 };
 

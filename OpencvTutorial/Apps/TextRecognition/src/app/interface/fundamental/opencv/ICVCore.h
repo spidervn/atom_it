@@ -13,6 +13,14 @@ public:
     virtual void scanImgPixels(cv::Mat& I) = 0;
     virtual void scanImgPixels_Iterator_(cv::Mat& I) = 0;
     virtual void scanImgPixels_Reference(cv::Mat& I) = 0;
+
+    virtual void filter2D(cv::InputArray src, 
+                            cv::OutputArray dst, 
+                            int ddepth,
+                            cv::InputArray kernel,
+                            cv::Point anchor,
+                            double delta = 0,
+                            int borderType = cv::BORDER_DEFAULT) = 0;
 };
 
 #endif

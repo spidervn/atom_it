@@ -10,6 +10,7 @@ int CFindingContoursApp::run(int argc, char* argv[])
     thresh = 100;                               
     max_thresh = 255;
     retrieCount = 4;
+    retrievalMode = 3;  // RETR_TREE
     const char* source_window = "Source";    
     String imgName("../data/happyfish.jpg");    // by default
     
@@ -32,7 +33,11 @@ int CFindingContoursApp::run(int argc, char* argv[])
     imshow( source_window, src );
 
     createTrackbar("Canny thresh:", source_window, &thresh, max_thresh, thresh_callback, this);    
-    createTrackbar("RetrievalModes:\r\n0-RETR_EXTERNAL\r\n1-RETR_LIST\r\n2-RETR_CCOMP\r\n3-RETR_TREE\r\n4-RETR_FLOODFILL", source_window, &thresh, max_thresh, thresh_callback, this);
+    createTrackbar("RetrievalModes:\r\n0-RETR_EXTERNAL\r\n1-RETR_LIST\r\n2-RETR_CCOMP\r\n3-RETR_TREE\r\n4-RETR_FLOODFILL", 
+                        source_window, 
+                        &retrievalMode, 
+                        retrieCount, 
+                        thresh_callback, this);
     thresh_callback( 0, this);
     waitKey(0);
     return(0);    
@@ -56,9 +61,31 @@ void CFindingContoursApp::myThresh_callback(int)
     Mat canny_output;
     vector<vector<Point> > contours;
     vector<Vec4i> hierarchy;
-    
+    int mode; 
+
+    if (retrievalMode == 0)
+    {
+        mode = RETR_EXTERNAL;
+    } 
+    else if (retrievalMode == 1)
+    {
+        mode = RETR_LIST;
+    }
+    else if (retrievalMode == 2)
+    {
+        mode = RETR_CCOMP;
+    }   
+    else if (retrievalMode == 3)
+    {
+        mode = RETR_TREE;
+    }
+    else 
+    {
+        mode = RETR_FLOODFILL;
+    }
+
     Canny( src_gray, canny_output, thresh, thresh*2, 3 );
-    findContours( canny_output, contours, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE, Point(0, 0) );
+    findContours( canny_output, contours, hierarchy, mode, CHAIN_APPROX_SIMPLE, Point(0, 0) );
     
     Mat drawing = Mat::zeros( canny_output.size(), CV_8UC3 );
     Mat drawingManual = Mat::zeros( canny_output.size(), CV_8UC3 );

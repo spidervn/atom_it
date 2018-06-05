@@ -1,6 +1,7 @@
 #include "CCVCore.h"
 
 using namespace cv;
+using namespace std;
 
 CCVCore::CCVCore()
 {
@@ -153,5 +154,87 @@ void CCVCore::scanImgPixels_Reference(cv::Mat& I)
             }            
             break;
         }
+    }
+}
+
+void CCVCore::filter2D(cv::InputArray src, 
+                            cv::OutputArray dst, 
+                            int ddepth,
+                            cv::InputArray kernel,
+                            cv::Point anchor,
+                            double delta = 0,
+                            int borderType = cv::BORDER_DEFAULT)
+{
+    CV_Assert( dst.type() == src.type() && dst.rows() == src.rows() && dst.cols() == src.cols());
+
+    int centerX = anchor.x;
+    int centerY = anchor.y;
+
+    if (anchor.x == -1 && anchor.y == -1)
+    {
+        centerX = anchor.x / 2;
+        centerY = anchor.y / 2;
+    }
+    
+    Mat m1 = src.getMat();
+    Mat m2 = dst.getMat();
+    Mat K = kernel.getMat();
+
+    int c1 = m1.cols;
+    int r1 = m1.rows;
+    int c2 = m2.cols;
+    int r2 = m2.rows;
+
+    int cK = K.cols;
+    int rK = K.rows;
+
+    int num_Channel = src.channels();
+    switch (num_Channel)
+    {
+        case 1:
+            // o[i,j] = sum(k,l) k[k][l] * i[i+k-cx, j+l-cy]
+            for (size_t x = 0; x < c1; x++)
+            {
+                for (size_t y = 0; y < r1; y++)
+                {
+                    int val = 0;
+
+                    for (size_t x1 = 0; x1<cK; ++x1) {
+                        for (size_t y1 = 0; y1<rK; ++y1) {
+                            val = val + m1.at<uchar>(y + y1 - centerY, x + x1 - centerX) * K.at<float>(y1,x1);
+                        }
+                    }
+
+                    uchar u_val = (uchar) val;
+                    m2.at<uchar>(y, x) = u_val;
+                }
+            }            
+            break;
+        case 3:
+            Mat_<Vec3b> m3b_src = m1;
+            Mat_<Vec3b> m3b_dst = m2;
+
+            for (size_t x = 0; x < c1; x++)
+            {
+                for (size_t y = 0; y < r1; y++)
+                {
+                    float val_0 = 0;
+                    float val_1 = 0;
+                    float val_2 = 0;
+
+                    for (size_t x1 = 0; x1<cK; ++x1) {
+                        for (size_t y1 = 0; y1<rK; ++y1) {
+                            val_0 = val_0 + m3b_src(y + y1 - centerY, x + x1 - centerX)[0] * K.at<float>(y1,x1);
+                            val_1 = val_1 + m3b_src(y + y1 - centerY, x + x1 - centerX)[1] * K.at<float>(y1,x1);
+                            val_2 = val_2 + m3b_src(y + y1 - centerY, x + x1 - centerX)[2] * K.at<float>(y1,x1);
+                        }
+                    }
+
+                    m3b_dst(y,x)[0] = (uchar)val_0;
+                    m3b_dst(y,x)[0] = (uchar)val_0;
+                    m3b_dst(y,x)[0] = (uchar)val_0;
+                }
+            }
+            break;
     }
 }
